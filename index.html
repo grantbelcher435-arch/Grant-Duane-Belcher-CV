@@ -2,12 +2,318 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Grant Duane Belcher - CV</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CV - Grant Belcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Professional Neutrals -->
+    <!-- Application Structure Plan: The SPA is designed as an executive dashboard to immediately capture a recruiter's attention. The structure prioritizes impact over chronology. It starts with a strong professional summary, followed by a high-level dashboard of quantifiable "Key Career Metrics." It then visualizes a major "Impact Story" (market share growth) with a chart to make the data tangible. The core of the experience is the "Interactive Career Journey," which allows users to explore detailed job histories on-demand via a timeline, preventing overwhelming text blocks. This is followed by a scannable "Core Competencies" grid. This user flow is designed to guide recruiters from high-level achievements to detailed experience in an engaging, non-linear way, making it much more effective than a static document for showcasing value. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Key achievements ($9.2M quota, $3M contract, 2x market share) -> Goal: Inform/Impress -> Viz/Presentation: Large-font "Stat Cards" -> Interaction: Subtle hover effect -> Justification: Immediately presents the most compelling quantitative results to hook the viewer. Library/Method: HTML/Tailwind.
+        - Report Info: TransUnion market share growth (30% to 60%) -> Goal: Show Change/Impact -> Viz/Presentation: Doughnut Chart -> Interaction: Hover tooltips -> Justification: Visually represents a key achievement, making the "doubling" of market share more impactful than text alone. Library/Method: Chart.js/Canvas.
+        - Report Info: Professional Experience section -> Goal: Organize/Change -> Viz/Presentation: Interactive Vertical Timeline -> Interaction: On-click display of job details -> Justification: Transforms a long, linear text block into an engaging, user-controlled exploration of career history, improving readability and focus. Library/Method: HTML/Tailwind/Vanilla JS.
+        - Report Info: Core Competencies list -> Goal: Organize/Inform -> Viz/Presentation: Grid of themed cards -> Interaction: None, focus on scannability -> Justification: Groups skills into logical themes, making it easier for recruiters to quickly assess capabilities. Library/Method: HTML/Tailwind. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDF8F0;
+            color: #4A4A4A;
+        }
+        .timeline-item .timeline-content {
+            display: none;
+        }
+        .timeline-item.active .timeline-content {
+            display: block;
+        }
+        .timeline-button {
+            transition: all 0.3s ease;
+        }
+        .timeline-button.active {
+            background-color: #3A5FCD;
+            color: #FFFFFF;
+            transform: scale(1.05);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 640px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1>Grant Duane Belcher</h1>
-    <p>Welcome to my online CV!</p>
-    <p>This is a basic homepage for your GitHub Pages site. You can edit this file to add your CV details, projects, and more.</p>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Grant Duane Belcher</h1>
+            <p class="text-xl md:text-2xl text-[#3A5FCD] font-medium mt-2">Strategic Sales Director & Channel Partner/VAR Leader</p>
+            <div class="mt-4 flex justify-center items-center gap-x-6 gap-y-2 flex-wrap text-sm">
+                <a href="mailto:belchno1@hotmail.com" class="hover:text-[#3A5FCD]">belchno1@hotmail.com</a>
+                <span>&bull;</span>
+                <span>+27 81 617 0734</span>
+                <span>&bull;</span>
+                <a href="https://linkedin.com/in/grant-belcher-33089547" target="_blank" class="hover:text-[#3A5FCD]">linkedin.com/in/grant-belcher-33089547</a>
+            </div>
+        </header>
+
+        <main>
+            <section id="summary" class="mb-16 bg-white/60 p-6 rounded-lg shadow-sm">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Professional Summary</h2>
+                <p class="text-center max-w-4xl mx-auto leading-relaxed">
+                    A results-driven Sales and Business Development Leader with over 15 years of experience in enterprise SaaS, go-to-market (GTM) strategy, and channel partnerships across Emerging Markets. Proven success in directing direct and indirect sales channels, leveraging VAR contracts, and treating value-added resellers (VARs) as an extended sales force to drive multinational organizations' strategic objectives. Expertise includes C-level negotiation, pipeline growth, and implementing data-driven sales strategies to secure multi-million dollar contracts and consistently exceed revenue targets.
+                </p>
+            </section>
+
+            <section id="metrics" class="mb-16">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Key Career Metrics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-sm transform hover:scale-105 transition-transform duration-300">
+                        <p class="text-4xl font-bold text-[#3A5FCD]">$9.2M</p>
+                        <p class="mt-2 font-semibold">Average Annual Quota</p>
+                        <p class="text-sm text-gray-600">Achieved at FICO, ranking 6th globally</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm transform hover:scale-105 transition-transform duration-300">
+                        <p class="text-4xl font-bold text-[#3A5FCD]">2X</p>
+                        <p class="mt-2 font-semibold">Market Share Growth</p>
+                        <p class="text-sm text-gray-600">Doubled banking sector share at TransUnion</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm transform hover:scale-105 transition-transform duration-300">
+                        <p class="text-4xl font-bold text-[#3A5FCD]">$3M</p>
+                        <p class="mt-2 font-semibold">Largest Contract Win</p>
+                        <p class="text-sm text-gray-600">3-year SaaS RFP in the insurance sector</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="impact-story" class="mb-16 text-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Impact Story: Driving Market Share Growth</h2>
+                 <p class="text-gray-600 mb-6 max-w-2xl mx-auto">One of my key achievements at TransUnion was leading the strategy that doubled our market share in the competitive banking sector from 30% to 60% in just three years.</p>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="chart-container">
+                        <canvas id="marketShareChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="career-journey" class="mb-16">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Interactive Career Journey</h2>
+                <p class="text-center text-gray-600 mb-8">Click on each role in the timeline to explore my detailed responsibilities and key achievements.</p>
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/3">
+                        <div class="space-y-4">
+                             <button data-target="baker-street" class="timeline-button w-full text-left p-4 rounded-lg bg-white shadow-sm hover:bg-gray-100">
+                                <p class="font-bold">Director & Co-owner</p>
+                                <p class="text-sm text-gray-600">Baker Street Software Solutions</p>
+                                <p class="text-xs text-gray-500">2021 – 2023</p>
+                            </button>
+                             <button data-target="tu-director" class="timeline-button w-full text-left p-4 rounded-lg bg-white shadow-sm hover:bg-gray-100">
+                                <p class="font-bold">Sales Director - Emerging Markets</p>
+                                <p class="text-sm text-gray-600">TransUnion</p>
+                                <p class="text-xs text-gray-500">2019 – 2020</p>
+                            </button>
+                             <button data-target="fico" class="timeline-button w-full text-left p-4 rounded-lg bg-white shadow-sm hover:bg-gray-100">
+                                <p class="font-bold">Client Sales Associate</p>
+                                <p class="text-sm text-gray-600">FICO</p>
+                                <p class="text-xs text-gray-500">2016 – 2019</p>
+                            </button>
+                             <button data-target="tu-manager" class="timeline-button w-full text-left p-4 rounded-lg bg-white shadow-sm hover:bg-gray-100">
+                                <p class="font-bold">Industry Manager</p>
+                                <p class="text-sm text-gray-600">TransUnion</p>
+                                <p class="text-xs text-gray-500">2013 – 2016</p>
+                            </button>
+                             <button data-target="tu-kam" class="timeline-button w-full text-left p-4 rounded-lg bg-white shadow-sm hover:bg-gray-100">
+                                <p class="font-bold">Senior Key Account Manager</p>
+                                <p class="text-sm text-gray-600">TransUnion</p>
+                                <p class="text-xs text-gray-500">2008 – 2013</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3">
+                        <div class="bg-white p-6 rounded-lg shadow-sm min-h-[300px]">
+                            <div id="baker-street" class="timeline-item">
+                                <h3 class="text-xl font-bold text-gray-800">Director & Co-owner</h3>
+                                <p class="font-semibold text-gray-600 mb-4">Baker Street Software Solutions</p>
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>Led the GTM, Sales & Distribution strategy with a dual focus on direct and indirect sales channels.</li>
+                                    <li>Secured appointment as the exclusive Value-Added Reseller (VAR) for KeenCorp (Netherlands) in South Africa and ROA.</li>
+                                    <li>Leveraged reseller partnerships across Africa to define market approaches and drive successful expansion.</li>
+                                    <li>Conducted strategic C-suite level meetings with partners, resellers, and prospective clients to align objectives.</li>
+                                    <li>Defined and implemented scalable sales process frameworks to onboard and empower junior team members.</li>
+                                </ul>
+                            </div>
+                            <div id="tu-director" class="timeline-item">
+                                <h3 class="text-xl font-bold text-gray-800">Sales Director - Emerging Markets</h3>
+                                <p class="font-semibold text-gray-600 mb-4">TransUnion</p>
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>Restructured the Emerging Markets Division, creating and executing a new GTM strategy focused on new business growth.</li>
+                                    <li>Directed and executed sales objectives to maximize revenue and profitability across the region.</li>
+                                    <li>Developed and implemented strategic sales plans, including forecasting and performance goal setting.</li>
+                                    <li>Led, guided, and motivated a high-performing sales team to achieve and exceed targets.</li>
+                                    <li>Ensured seamless delivery of products and solutions by collaborating with internal support departments.</li>
+                                </ul>
+                            </div>
+                            <div id="fico" class="timeline-item">
+                                <h3 class="text-xl font-bold text-gray-800">Client Sales Associate</h3>
+                                <p class="font-semibold text-gray-600 mb-4">FICO</p>
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>Successfully expanded FICO's footprint within Banking, Financial Services, Telecommunications, and Insurance sectors.</li>
+                                    <li>Acted as senior relationship executive, managing complex client accounts and leading virtual teams.</li>
+                                    <li>Drove direct sales of FICO's analytical and software solutions to enterprise clients.</li>
+                                    <li>Consistently generated, qualified, and converted new leads through strategic networking and marketing campaigns.</li>
+                                    <li>Developed and delivered compelling proposals complete with detailed ROI models to secure new business.</li>
+                                </ul>
+                            </div>
+                            <div id="tu-manager" class="timeline-item">
+                               <h3 class="text-xl font-bold text-gray-800">Industry Manager</h3>
+                                <p class="font-semibold text-gray-600 mb-4">TransUnion</p>
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>Managed and executed sales strategies to achieve maximum revenue and market penetration.</li>
+                                    <li>Developed and implemented long-term strategic sales plans and directed accurate sales forecasting.</li>
+                                    <li>Formulated policies to expand market share in existing markets and penetrate new verticals.</li>
+                                    <li>Led and motivated a sales force to consistently exceed sales and revenue targets.</li>
+                                    <li>Optimized key client accounts by conducting strategic insight sessions to align solutions with their core needs.</li>
+                                </ul>
+                            </div>
+                            <div id="tu-kam" class="timeline-item">
+                                <h3 class="text-xl font-bold text-gray-800">Senior Key Account Manager</h3>
+                                <p class="font-semibold text-gray-600 mb-4">TransUnion</p>
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>Aggressively drove market share and revenue growth, identifying and closing significant up-sell and cross-sell opportunities.</li>
+                                    <li>Successfully implemented core and value-add solutions to achieve all set targets and objectives.</li>
+                                    <li>Key player in the team that increased banking sector market share from 30% to 60% between 2008 and 2011.</li>
+                                    <li>Cultivated deep, trusting relationships with C-level clients through proactive communication and superior service.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="competencies" class="mb-16">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Core Competencies</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 text-center">
+                    <div class="bg-white p-4 rounded-lg shadow-sm"><p>Enterprise SaaS Sales</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm"><p>Go-to-Market Strategy</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm"><p>Channel/VAR Management</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm"><p>Sales Leadership</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm"><p>Strategic Partnerships</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm"><p>C-level Negotiation</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm"><p>Salesforce & CRM</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm"><p>Pipeline Growth</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm"><p>Data-driven Sales</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm"><p>Consultative Selling</p></div>
+                </div>
+            </section>
+            
+            <section id="education">
+                 <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Education & Certifications</h2>
+                 <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-sm">
+                     <ul class="space-y-3">
+                         <li><strong>Management Development Programme (NQF 7):</strong> University of South Africa</li>
+                         <li><strong>Complex Solution Selling Certificate:</strong> Stratham Bryce</li>
+                         <li><strong>Microsoft Certified Professional</strong></li>
+                         <li><strong>Introduction to Generative AI:</strong> Google Learning</li>
+                     </ul>
+                 </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-12 py-6 border-t border-gray-200">
+            <p class="text-sm text-gray-500">&copy; 2025 Grant Belcher | Interactive Professional Profile</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('marketShareChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Rest of Market', 'TransUnion Market Share'],
+                    datasets: [{
+                        data: [40, 60],
+                        backgroundColor: [
+                            '#E0E0E0',
+                            '#4CAF50'
+                        ],
+                        borderColor: [
+                            '#FFFFFF',
+                            '#FFFFFF'
+                        ],
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        },
+                        title: {
+                             display: true,
+                             text: 'Market Share Growth (2008-2011)',
+                             font: {
+                                size: 16
+                             }
+                        }
+                    }
+                }
+            });
+
+            const timelineButtons = document.querySelectorAll('.timeline-button');
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            function showTimelineItem(targetId) {
+                timelineItems.forEach(item => {
+                    item.style.display = 'none';
+                });
+                timelineButtons.forEach(button => {
+                    button.classList.remove('active');
+                });
+                
+                const targetItem = document.getElementById(targetId);
+                const activeButton = document.querySelector(`[data-target="${targetId}"]`);
+                
+                if (targetItem) {
+                    targetItem.style.display = 'block';
+                }
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                }
+            }
+
+            timelineButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+                    showTimelineItem(targetId);
+                });
+            });
+
+            showTimelineItem('baker-street');
+        });
+    </script>
 </body>
 </html>
